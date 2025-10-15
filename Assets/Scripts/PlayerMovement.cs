@@ -1,45 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] public float moveSpeed;
-    [SerializeField] public float padding;
+    public float moveSpeed = 5f; // hareket hızı
 
-    public bool faceTurntoDirection =true;
-
-
-    private Rigidbody2D rb;
-    Camera cam;
-
-
-    
-    void Start()
+    void Update()
     {
-        rb = GetComponent<Rigidbody2D>();
-    }
+        float h = Input.GetAxisRaw("Horizontal"); // A-D veya Sol-Sağ ok
+        float v = Input.GetAxisRaw("Vertical");   // W-S veya Yukarı-Aşağı ok
 
-
-    private void FixedUpdate()
-    {
-        Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
-
-        Vector2 nextPos = rb.position + input*moveSpeed*Time.fixedDeltaTime;
-
-
-        Vector2 min = cam.ViewportToWorldPoint(new Vector3(0, 0));
-        Vector2 max = cam.ViewportToWorldPoint(new Vector3(1, 1));
-        nextPos.x = Mathf.Clamp(nextPos.x, min.x + padding, max.x - padding);
-        nextPos.y = Mathf.Clamp(nextPos.y, min.y + padding, max.y - padding);
-
-        rb.MovePosition(nextPos);
-
-        
-        if (faceTurntoDirection && input.sqrMagnitude > 0.0001f)
-        {
-            float angle = Mathf.Atan2(input.y, input.x) * Mathf.Rad2Deg;
-            rb.MoveRotation(angle); 
-        }
+        Vector3 move = new Vector3(h, v, 0f).normalized;
+        transform.position += move * moveSpeed * Time.deltaTime;
     }
 }
