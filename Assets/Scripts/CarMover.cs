@@ -3,7 +3,7 @@
 public class CarMover : MonoBehaviour
 {
     public float speed = 5f;       // soldan sağa ya da sağdan sola hareket
-    public float lifeTime = 10f;   // emniyet için otomatik yok et
+    public float lifeTime = 5f;   // emniyet için otomatik yok et
     public GameObject redLight;    // üstteki kırmızı ışık objesi
 
     void Start()
