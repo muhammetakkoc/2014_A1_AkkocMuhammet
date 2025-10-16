@@ -14,6 +14,11 @@ public class CarCriminal : MonoBehaviour
 
         if (redLight != null)
             redLight.SetActive(isCriminal);
+
+        if (isCriminal)
+        {
+            gameObject.tag = "Enemy";
+        }
     }
 
     void Update()

@@ -2,22 +2,30 @@
 
 public class PlayerShooting : MonoBehaviour
 {
-    public GameObject bulletPrefab;   
-    public Transform firePoint;       
-    public float bulletSpeed = 10f;   
+    public GameObject bulletPrefab;
+    public Transform firePoint;
+    public float bulletSpeed = 10f;
 
     public ParticleSystem muzzleFlash;
 
+    [Header("Cooldown")]
+    public float fireCooldown = 0.15f; // 
+    float nextFireTime = 0f;
+
     void Update()
     {
-        if (Input.GetMouseButtonDown(0)) 
+        
+        if (Input.GetMouseButton(0) && Time.time >= nextFireTime)
         {
             Shoot();
             if (muzzleFlash)
             {
+                
                 muzzleFlash.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
                 muzzleFlash.Play();
             }
+
+            nextFireTime = Time.time + fireCooldown;
         }
     }
 
@@ -30,9 +38,6 @@ public class PlayerShooting : MonoBehaviour
         if (rb != null)
         {
             rb.velocity = firePoint.up * bulletSpeed;
-           
         }
-
-        
     }
 }
