@@ -2,7 +2,7 @@
 
 public class CarCriminal : MonoBehaviour
 {
-    [Range(0f, 1f)] public float criminalChance = 0.25f; 
+    [Range(0f, 1f)] [SerializeField] float criminalChance = 0.40f; 
     public GameObject redLight; 
     public float blinkSpeed = 4f; 
 

@@ -10,9 +10,13 @@ public class PlayerShooting : MonoBehaviour
     [SerializeField] float bulletSpeed;
     public ParticleSystem muzzleFlash;
 
+    [SerializeField] AudioClip shootSound;  
+    private AudioSource audioSource;
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.playOnAwake = false;
     }
     void Update()
     {
@@ -40,6 +44,8 @@ public class PlayerShooting : MonoBehaviour
 
             muzzleFlash.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
             muzzleFlash.Play();
+            if (shootSound != null)
+                audioSource.PlayOneShot(shootSound);
         }
 
 
