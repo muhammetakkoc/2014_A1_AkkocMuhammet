@@ -1,21 +1,19 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
     public float lifeTime = 2f;
     //public EnemyCounter enemyCounter;
-   
+    private Rigidbody2D rb;
 
 
     void Start()
     {
         Destroy(gameObject, lifeTime);
+        rb = GetComponent<Rigidbody2D>();
     }
+   
 
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-        
-    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -35,4 +33,4 @@ public class Bullet : MonoBehaviour
         }
 
     }
-}
+}
